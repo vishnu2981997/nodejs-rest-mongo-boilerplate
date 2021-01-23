@@ -110,3 +110,4 @@ modules.xml
 # End of https://www.toptal.com/developers/gitignore/api/webstorm+all,vscode,redis,elasticbeanstalk
 # Project exclude paths
 /node_modules/
+/yarn.lock
