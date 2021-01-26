@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const helpers = require('./helpers');
 const db = require('./v1/databases/mongo');
 
 const v1 = require('./v1');
@@ -14,9 +15,11 @@ const router = express.Router;
 
 app.use('/api', v1({config, router}));
 
-// app.use((req, res, next) => {
-//     return res.status(404).json({message: 'No such route exists'});
-// });
+app.use('*', (req, res, next) => {
+    return res.status(404).json({message: 'No such route exists'});
+});
+
+app.use(helpers({config}).responseHelpers.errorHandler);
 
 // start server
 const host = '0.0.0.0';

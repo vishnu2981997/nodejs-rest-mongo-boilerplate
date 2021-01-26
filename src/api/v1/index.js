@@ -8,5 +8,7 @@ module.exports = function ({config, router}) {
 
     api.use('/v1', routes({config, router, controllers, helpers}));
 
+    api.use(helpers.responseHelpers.errorHandler);
+
     return api;
 }

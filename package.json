@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/api/index.js",
   "scripts": {
-    "start": "node src\\api\\index.js",
-    "dev": "nodemon",
+    "start": "node src\\api",
+    "start:pm2": "pm2 start src\\api",
+    "dev": "nodemon src\\api",
     "dev:inspect": "nodemon --exec \"node --inspect=7000 src\\api\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +15,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "http-errors": "^1.8.0",
     "mongoose": "^5.11.13"
   },
   "devDependencies": {

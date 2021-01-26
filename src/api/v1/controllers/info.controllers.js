@@ -6,12 +6,14 @@ module.exports = function ({config, services, helpers}) {
 
     const asyncHelpers = helpers.asyncHelpers;
 
+    const {apiResponse} = helpers.responseHelpers;
+
     instance.infoController = asyncHelpers.catchAsync(async (req, res, next) => {
         let result = await infoServices.infoService(req);
         if (result.err) {
-            return res.status(400).json({message: result.err});
+            return apiResponse(req, res, 400, result.err);
         }
-        return res.status(200).json({message: 'Hello human. Request from IP address ' + result.data + ' logged.'});
+        return apiResponse(req, res, 200, {message: 'Hello human. Request from IP address ' + result.data + ' logged.'})
     });
 
     return instance;
