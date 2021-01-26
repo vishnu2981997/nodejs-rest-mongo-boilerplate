@@ -1,6 +1,8 @@
 const asyncHelpers = require('./async.helpers');
 const requestHelpers = require('./request.helpers');
 const responseHelpers = require('./response.helpers');
+const cryptoHelpers = require('./crypto.helpers');
+
 
 module.exports = function ({config}) {
 
@@ -9,6 +11,7 @@ module.exports = function ({config}) {
     instance.asyncHelpers = asyncHelpers({config});
     instance.requestHelpers = requestHelpers({config});
     instance.responseHelpers = responseHelpers({config});
+    instance.cryptoHelpers = cryptoHelpers({config});
 
     return instance;
 };

@@ -4,22 +4,6 @@ module.exports = function ({config}) {
 
     const instance = {};
 
-    instance.apiResponse = (req, res, code, data) => {
-        const response = {
-            code: code,
-            data: '',
-            stack: ''
-        };
-
-        if (typeof data === 'string') {
-            response.data = data;
-        } else if (data.message) {
-            response.data = data.message;
-        }
-
-        return res.status(500).json(response);
-    }
-
     instance.errorHandler = (err, req, res, next) => {
         // switch (true) {
         //     case err.name === 'ValidationError':

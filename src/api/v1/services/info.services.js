@@ -1,4 +1,4 @@
-module.exports = function ({config, helpers}) {
+module.exports = function ({config, models, helpers}) {
 
     const instance = {}
 
@@ -10,7 +10,7 @@ module.exports = function ({config, helpers}) {
         try {
             result.data = requestHelpers.getIpAddress(req);
         } catch (err) {
-            result.err = err;
+            result.error = err;
         }
 
         return result;
