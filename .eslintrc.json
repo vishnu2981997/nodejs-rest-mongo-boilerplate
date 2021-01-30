@@ -10,7 +10,6 @@
     "plugin:prettier/recommended"
   ],
   "plugins": [
-    "jest",
     "security",
     "prettier"
   ],
