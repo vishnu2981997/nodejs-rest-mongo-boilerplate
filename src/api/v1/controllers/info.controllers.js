@@ -10,8 +10,8 @@ module.exports = function ({config, services, helpers}) {
 
     instance.infoController = asyncHelpers.catchAsync(async (req, res, next) => {
         let result = await infoServices.infoService(req);
-        if (result.error) {
-            return apiError(req, res, result.err);
+        if (result.hasOwnProperty('error')) {
+            return apiError(req, res, result.error);
         }
         return apiResponse(req, res, {message: 'Hello human. Request from IP address ' + result.data + ' logged.'});
     });

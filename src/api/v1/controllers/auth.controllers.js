@@ -12,15 +12,15 @@ module.exports = function ({config, services, helpers}) {
     instance.registerController = asyncHelpers.catchAsync(async (req, res, next) => {
 
         const user = await userServices.getUserByEmail(req.body.email);
-        if (user.error) {
+        if (user.hasOwnProperty('error')) {
             return apiError(req, res, user.error);
         }
-        if (user.data) {
+        if (user.hasOwnProperty('data')) {
             return apiError(req, res, createError(422, 'Email already exists.'));
         }
 
         const registerUser = await userServices.addUser(req.body);
-        if (registerUser.error) {
+        if (registerUser.hasOwnProperty('error')) {
             return apiError(req, res, registerUser.error);
         }
 
@@ -34,7 +34,7 @@ module.exports = function ({config, services, helpers}) {
         const response = {};
 
         const user = await userServices.getUserByEmail(email);
-        if (user.error) {
+        if (user.hasOwnProperty('error')) {
             return apiError(req, res, user.error);
         }
         response.user = {
@@ -43,7 +43,7 @@ module.exports = function ({config, services, helpers}) {
         }
 
         const login = await authServices.verifyPassword(password, user.data.password);
-        if (login.error) {
+        if (login.hasOwnProperty('error')) {
             return apiError(req, res, login.error);
         }
         if (!login) {
@@ -57,7 +57,7 @@ module.exports = function ({config, services, helpers}) {
         };
 
         const accessToken = await authServices.generateAccessToken(tokenData);
-        if (accessToken.error) {
+        if (accessToken.hasOwnProperty('error')) {
             return apiError(req, res, accessToken.error);
         }
         response.accessToken = accessToken.data;
