@@ -1,3 +1,4 @@
+const config = require("config");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -19,7 +20,6 @@ app.use(
   })
 );
 
-const config = {};
 const router = express.Router;
 
 app.use("/api", v1({ config, router }));
@@ -31,8 +31,8 @@ app.use("*", (req, res, next) => {
 app.use(helpers({ config }).responseHelpers.errorHandler);
 
 // start server
-const host = "0.0.0.0";
-const port = 8080;
+const host = config.server.host || "0.0.0.0";
+const port = config.server.port || 8080;
 app.listen(port, host, () => {
   console.log(`Server listening on port ${port}`);
 });
