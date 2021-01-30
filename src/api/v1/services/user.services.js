@@ -1,4 +1,4 @@
-module.exports = function ({ config, models, helpers }) {
+module.exports = ({ config, models, helpers }) => {
   const instance = {};
 
   const { responseHelpers, cryptoHelpers } = helpers;

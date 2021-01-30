@@ -1,6 +1,6 @@
 const responseHelpers = require("./response.helpers");
 
-module.exports = function ({ config }) {
+module.exports = ({ config }) => {
   const instance = {};
 
   instance.responseHelpers = responseHelpers({ config });

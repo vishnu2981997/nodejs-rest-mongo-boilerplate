@@ -1,6 +1,6 @@
 const createError = require("http-errors");
 
-module.exports = function ({ config }) {
+module.exports = ({ config }) => {
   const instance = {};
 
   instance.errorHandler = (err, req, res, next) => {

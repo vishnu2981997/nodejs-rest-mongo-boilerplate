@@ -2,7 +2,7 @@ const infoServices = require("./info.services");
 const authServices = require("./auth.services");
 const userServices = require("./user.services");
 
-module.exports = function ({ config, models, helpers }) {
+module.exports = ({ config, models, helpers }) => {
   const instance = {};
 
   instance.infoServices = infoServices({ config, models, helpers });

@@ -1,6 +1,6 @@
 const authMiddleware = require("./auth.middleware");
 
-module.exports = function ({ config, helpers }) {
+module.exports = ({ config, helpers }) => {
   const instance = {};
 
   instance.authMiddleware = authMiddleware({ config, helpers });

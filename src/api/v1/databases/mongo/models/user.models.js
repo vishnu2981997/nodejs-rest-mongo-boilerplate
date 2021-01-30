@@ -1,4 +1,4 @@
-module.exports = function ({ config, mongoose }) {
+module.exports = ({ config, mongoose }) => {
   const instance = {};
 
   const { Schema } = mongoose;

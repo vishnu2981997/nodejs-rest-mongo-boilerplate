@@ -6,7 +6,7 @@ let services = require("./services");
 let controllers = require("./controllers");
 let models = require("./databases/mongo/models");
 
-module.exports = function ({ config, router }) {
+module.exports = ({ config, router }) => {
   const api = router();
 
   helpers = helpers({ config });
