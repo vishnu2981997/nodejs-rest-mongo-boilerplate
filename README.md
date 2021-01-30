@@ -20,6 +20,9 @@ cd myproject
 # Install NPM dependencies
 yarn install
 
+# Install pm2 globally
+npm install -g pm2
+
 # Then simply start your app
 yarn start
 
