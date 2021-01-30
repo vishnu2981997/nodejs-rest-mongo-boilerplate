@@ -1,5 +1,5 @@
-module.exports = function ({config}) {
-    const instance = {};
+module.exports = function ({ config }) {
+  const instance = {};
 
-    return instance;
-}
+  return instance;
+};

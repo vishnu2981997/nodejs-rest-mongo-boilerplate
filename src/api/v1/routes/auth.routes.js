@@ -1,11 +1,11 @@
-module.exports = function ({config, router, controllers, helpers}) {
-    const authApi = router();
+module.exports = function ({ config, router, controllers, helpers }) {
+  const authApi = router();
 
-    const authControllers = controllers.authControllers;
+  const { authControllers } = controllers;
 
-    authApi.post('/register', authControllers.registerController);
+  authApi.post("/register", authControllers.registerController);
 
-    authApi.post('/login', authControllers.loginController);
+  authApi.post("/login", authControllers.loginController);
 
-    return authApi;
-}
+  return authApi;
+};

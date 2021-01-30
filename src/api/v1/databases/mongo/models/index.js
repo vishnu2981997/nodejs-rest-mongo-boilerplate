@@ -1,9 +1,9 @@
-const userModals = require('./user.models')
+const userModals = require("./user.models");
 
-module.exports = function ({config, mongoose}) {
-    const instance = {};
+module.exports = function ({ config, mongoose }) {
+  const instance = {};
 
-    instance.userModals = userModals({config, mongoose});
+  instance.userModals = userModals({ config, mongoose });
 
-    return instance;
-}
+  return instance;
+};

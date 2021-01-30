@@ -1,9 +1,9 @@
-module.exports = function ({config, router, controllers, helpers}) {
-    const infoApi = router();
+module.exports = function ({ config, router, controllers, helpers }) {
+  const infoApi = router();
 
-    const infoControllers = controllers.infoControllers;
+  const { infoControllers } = controllers;
 
-    infoApi.get('/', infoControllers.infoController)
+  infoApi.get("/", infoControllers.infoController);
 
-    return infoApi;
-}
+  return infoApi;
+};

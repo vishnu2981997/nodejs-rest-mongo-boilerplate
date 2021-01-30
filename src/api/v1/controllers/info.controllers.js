@@ -1,20 +1,22 @@
-module.exports = function ({config, services, helpers}) {
+module.exports = function ({ config, services, helpers }) {
+  const instance = {};
 
-    const instance = {};
+  const { infoServices } = services;
 
-    const infoServices = services.infoServices;
+  const { asyncHelpers } = helpers;
 
-    const asyncHelpers = helpers.asyncHelpers;
+  const { apiResponse, apiError } = helpers.responseHelpers;
 
-    const {apiResponse, apiError} = helpers.responseHelpers;
-
-    instance.infoController = asyncHelpers.catchAsync(async (req, res, next) => {
-        let result = await infoServices.infoService(req);
-        if (result.hasOwnProperty('error')) {
-            return apiError(req, res, result.error);
-        }
-        return apiResponse(req, res, {message: 'Hello human. Request from IP address ' + result.data + ' logged.'});
+  instance.infoController = asyncHelpers.catchAsync(async (req, res, next) => {
+    let result = {};
+    result = await infoServices.infoService(req);
+    if (result.error) {
+      return apiError(req, res, result.error);
+    }
+    return apiResponse(req, res, {
+      message: `Hello human. Request from IP address ${result.data} logged.`,
     });
+  });
 
-    return instance;
-}
+  return instance;
+};

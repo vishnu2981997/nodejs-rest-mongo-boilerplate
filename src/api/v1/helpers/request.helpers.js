@@ -1,9 +1,9 @@
-module.exports = function ({config}) {
-    const instance = {};
+module.exports = function ({ config }) {
+  const instance = {};
 
-    instance.getIpAddress = (req) => {
-        return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    };
+  instance.getIpAddress = (req) => {
+    return req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  };
 
-    return instance;
-}
+  return instance;
+};

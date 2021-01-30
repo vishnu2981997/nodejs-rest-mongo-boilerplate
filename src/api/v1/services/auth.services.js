@@ -1,52 +1,51 @@
-module.exports = function ({config, models, helpers}) {
+module.exports = function ({ config, models, helpers }) {
+  const instance = {};
 
-    const instance = {}
+  const { requestHelpers, cryptoHelpers } = helpers;
 
-    const {requestHelpers, cryptoHelpers} = helpers;
+  const { bCryptCompare, jwtHash } = cryptoHelpers;
 
-    const {bCryptCompare, jwtHash} = cryptoHelpers;
+  instance.verifyPassword = async (password, hashedPassword) => {
+    const result = {};
 
-    instance.verifyPassword = async (password, hashedPassword) => {
-        let result = {};
-
-        try {
-            result.data = await bCryptCompare(password, hashedPassword);
-        } catch (err) {
-            result.error = err;
-        }
-
-        return result;
+    try {
+      result.data = await bCryptCompare(password, hashedPassword);
+    } catch (err) {
+      result.error = err;
     }
 
-    instance.generateAccessToken = async (data) => {
-        let result = {};
+    return result;
+  };
 
-        try {
-            result.data = await jwtHash(data, '6h');
-        } catch (err) {
-            result.error = err;
-        }
+  instance.generateAccessToken = async (data) => {
+    const result = {};
 
-        return result;
+    try {
+      result.data = await jwtHash(data, "6h");
+    } catch (err) {
+      result.error = err;
     }
 
-    instance.generateRefreshToken = async (data) => {
-        let result = {};
+    return result;
+  };
 
-        try {
-            result.data = await jwtHash(data, '24h');
-        } catch (err) {
-            result.error = err;
-        }
+  instance.generateRefreshToken = async (data) => {
+    const result = {};
 
-        return result;
+    try {
+      result.data = await jwtHash(data, "24h");
+    } catch (err) {
+      result.error = err;
     }
 
-    instance.generateForgotPasswordTokenService = async (req) => {
-        let result = {};
+    return result;
+  };
 
-        return result;
-    }
+  instance.generateForgotPasswordTokenService = async (req) => {
+    const result = {};
 
-    return instance;
-}
+    return result;
+  };
+
+  return instance;
+};

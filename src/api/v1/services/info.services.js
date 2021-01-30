@@ -1,20 +1,19 @@
-module.exports = function ({config, models, helpers}) {
+module.exports = function ({ config, models, helpers }) {
+  const instance = {};
 
-    const instance = {}
+  const { requestHelpers } = helpers;
 
-    const { requestHelpers } = helpers;
+  instance.infoService = async (req) => {
+    const result = {};
 
-    instance.infoService = async (req) => {
-        let result = {};
-
-        try {
-            result.data = requestHelpers.getIpAddress(req);
-        } catch (err) {
-            result.error = err;
-        }
-
-        return result;
+    try {
+      result.data = requestHelpers.getIpAddress(req);
+    } catch (err) {
+      result.error = err;
     }
 
-    return instance;
-}
+    return result;
+  };
+
+  return instance;
+};

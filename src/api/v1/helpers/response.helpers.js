@@ -1,48 +1,47 @@
-const createError = require('http-errors');
+const createError = require("http-errors");
 
-module.exports = function ({config}) {
+module.exports = function ({ config }) {
+  const instance = {};
 
-    const instance = {};
+  instance.apiResponse = (req, res, data, code = 200, sendResponse = true) => {
+    const response = {
+      code,
+      data: "",
+      stack: "",
+    };
 
-    instance.apiResponse = (req, res, data, code = 200, sendResponse = true ) => {
-        const response = {
-            code: code,
-            data: '',
-            stack: ''
-        };
-
-        if (typeof data === 'string') {
-            response.data = data;
-        } else if (data.message) {
-            response.data = data.message;
-        } else {
-            response.data = data;
-        }
-
-        return res.status(code).json(response);
+    if (typeof data === "string") {
+      response.data = data;
+    } else if (data.message) {
+      response.data = data.message;
+    } else {
+      response.data = data;
     }
 
-    instance.apiError = (req, res, data, sendResponse = true ) => {
-        const response = {
-            code: data.code || data.statusCode || 500,
-            data: '',
-            stack: ''
-        };
+    return res.status(code).json(response);
+  };
 
-        if (typeof data === 'string') {
-            response.data = data;
-        } else if (data.message) {
-            response.data = data.message;
-        }
+  instance.apiError = (req, res, data, sendResponse = true) => {
+    const response = {
+      code: data.code || data.statusCode || 500,
+      data: "",
+      stack: "",
+    };
 
-        return res.status(response.code).json(response);
+    if (typeof data === "string") {
+      response.data = data;
+    } else if (data.message) {
+      response.data = data.message;
     }
 
-    instance.errorHandler = (err, req, res, next) => {
-        return res.status(500).json({message: err.message});
-    }
+    return res.status(response.code).json(response);
+  };
 
-    instance.createError = createError;
+  instance.errorHandler = (err, req, res, next) => {
+    return res.status(500).json({ message: err.message });
+  };
 
-    return instance;
-}
+  instance.createError = createError;
+
+  return instance;
+};
