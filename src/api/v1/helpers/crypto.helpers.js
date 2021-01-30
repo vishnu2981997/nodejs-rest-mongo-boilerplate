@@ -1,7 +1,7 @@
 const bCrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-module.exports = function ({ config }) {
+module.exports.cryptoHelpers = ({ config }) => {
   const instance = {};
 
   instance.bCryptHash = (data) => {

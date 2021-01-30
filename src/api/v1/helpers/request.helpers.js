@@ -1,4 +1,4 @@
-module.exports = function ({ config }) {
+module.exports.requestHelpers = ({ config }) => {
   const instance = {};
 
   instance.getIpAddress = (req) => {

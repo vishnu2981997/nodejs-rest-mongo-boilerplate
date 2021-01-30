@@ -1,4 +1,4 @@
-module.exports = function ({ config, router, controllers, helpers }) {
+module.exports = ({ config, router, middlewares, controllers, helpers }) => {
   const infoApi = router();
 
   const { infoControllers } = controllers;

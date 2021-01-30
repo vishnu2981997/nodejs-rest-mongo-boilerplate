@@ -1,6 +1,6 @@
 const createError = require("http-errors");
 
-module.exports = function ({ config }) {
+module.exports.responseHelpers = ({ config }) => {
   const instance = {};
 
   instance.apiResponse = (req, res, data, code = 200, sendResponse = true) => {
@@ -38,7 +38,19 @@ module.exports = function ({ config }) {
   };
 
   instance.errorHandler = (err, req, res, next) => {
-    return res.status(500).json({ message: err.message });
+    const response = {
+      code: err.code || err.statusCode || 500,
+      message: "",
+      stack: "",
+    };
+
+    if (typeof err === "string") {
+      response.message = err;
+    } else if (err.message) {
+      response.message = err.message;
+    }
+
+    return res.status(response.code).json(response);
   };
 
   instance.createError = createError;

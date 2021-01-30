@@ -1,4 +1,4 @@
-module.exports = function ({ config }) {
+module.exports.asyncHelpers = ({ config }) => {
   const instance = {};
 
   instance.catchAsync = (fn) => (req, res, next) => {

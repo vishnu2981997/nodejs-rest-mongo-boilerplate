@@ -1,9 +1,9 @@
 module.exports = function ({ config, services, helpers }) {
   const instance = {};
 
-  const { asyncHelpers } = helpers;
+  const { asyncHelpers, responseHelpers } = helpers;
 
-  const { apiResponse, apiError, createError } = helpers.responseHelpers;
+  const { apiResponse, apiError, createError } = responseHelpers;
 
   const { authServices } = services;
   const { userServices } = services;

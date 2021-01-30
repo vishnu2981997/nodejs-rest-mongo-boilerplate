@@ -1,9 +1,9 @@
-const asyncHelpers = require("./async.helpers");
-const requestHelpers = require("./request.helpers");
-const responseHelpers = require("./response.helpers");
-const cryptoHelpers = require("./crypto.helpers");
+const { asyncHelpers } = require("./async.helpers");
+const { requestHelpers } = require("./request.helpers");
+const { responseHelpers } = require("./response.helpers");
+const { cryptoHelpers } = require("./crypto.helpers");
 
-module.exports = function ({ config }) {
+module.exports.helpers = ({ config }) => {
   const instance = {};
 
   instance.asyncHelpers = asyncHelpers({ config });
