@@ -5,7 +5,6 @@
   },
   "extends": [
     "airbnb-base",
-    "plugin:jest/recommended",
     "plugin:security/recommended",
     "plugin:prettier/recommended"
   ],
