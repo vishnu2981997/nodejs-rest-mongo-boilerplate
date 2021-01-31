@@ -1,11 +1,11 @@
 const authMiddleware = require("./auth.middleware");
 const loggingMiddleware = require("./logging.middleware");
 
-module.exports = ({ config, helpers }) => {
+module.exports = ({ config, utils, helpers }) => {
   const instance = {};
 
-  instance.authMiddleware = authMiddleware({ config, helpers });
-  instance.loggingMiddleware = loggingMiddleware({ config, helpers });
+  instance.authMiddleware = authMiddleware({ config, utils, helpers });
+  instance.loggingMiddleware = loggingMiddleware({ config, utils, helpers });
 
   return instance;
 };

@@ -1,4 +1,4 @@
-module.exports = ({ config, models, helpers }) => {
+module.exports = ({ config, models, utils, helpers }) => {
   const instance = {};
 
   const { requestHelpers } = helpers;

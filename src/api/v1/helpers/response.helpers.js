@@ -3,6 +3,17 @@ const createError = require("http-errors");
 module.exports.responseHelpers = ({ config }) => {
   const instance = {};
 
+  const logIt = async (req, data, type = "info") => {
+    const { log } = req;
+    if (log) {
+      try {
+        log[type](data);
+      } catch (error) {
+        console.log("error while logging", error.message);
+      }
+    }
+  };
+
   instance.apiResponse = (req, res, data, code = 200, sendResponse = true) => {
     const response = {
       code,
@@ -16,6 +27,10 @@ module.exports.responseHelpers = ({ config }) => {
       response.data = data.message;
     } else {
       response.data = data;
+    }
+
+    if (config.logging.response) {
+      logIt(req, response);
     }
 
     if (sendResponse) {
@@ -36,6 +51,10 @@ module.exports.responseHelpers = ({ config }) => {
       response.data = data.message;
     }
 
+    if (config.logging.error) {
+      logIt(req, response, "error");
+    }
+
     if (sendResponse) {
       return res.status(response.code).json(response);
     }
@@ -52,6 +71,10 @@ module.exports.responseHelpers = ({ config }) => {
       response.message = err;
     } else if (err.message) {
       response.message = err.message;
+    }
+
+    if (config.logging.error) {
+      logIt(req, response, "error");
     }
 
     return res.status(response.code).json(response);
