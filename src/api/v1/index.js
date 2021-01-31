@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const validations = require("./validations");
 let { helpers } = require("./helpers");
 let middlewares = require("./middleware");
 let services = require("./services");
@@ -29,7 +30,7 @@ module.exports = ({ config, router }) => {
 
   api.use(
     "/api/v1",
-    routes({ config, router, middlewares, controllers, helpers })
+    routes({ config, router, middlewares, validations, controllers, helpers })
   );
 
   api.use(helpers.responseHelpers.errorHandler);

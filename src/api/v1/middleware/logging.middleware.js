@@ -43,7 +43,7 @@ module.exports = ({ config, utils, helpers }) => {
     next();
   };
 
-  instance.initializeLogger = async (req, res, next) => {
+  instance.initializeLogger = (req, res, next) => {
     if (!req.log) {
       req.log = logging.logger(req);
     }

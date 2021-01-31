@@ -3,7 +3,7 @@ const createError = require("http-errors");
 module.exports.responseHelpers = ({ config }) => {
   const instance = {};
 
-  const logIt = async (req, data, type = "info") => {
+  const logIt = (req, data, type = "info") => {
     const { log } = req;
     if (log) {
       try {
@@ -18,7 +18,6 @@ module.exports.responseHelpers = ({ config }) => {
     const response = {
       code,
       data: "",
-      stack: "",
     };
 
     if (typeof data === "string") {
@@ -39,45 +38,43 @@ module.exports.responseHelpers = ({ config }) => {
   };
 
   instance.apiError = (req, res, data, sendResponse = true) => {
-    const response = {
+    const apiError = {
       code: data.code || data.statusCode || 500,
       data: "",
-      stack: "",
     };
 
     if (typeof data === "string") {
-      response.data = data;
+      apiError.data = data;
     } else if (data.message) {
-      response.data = data.message;
+      apiError.data = data.message;
     }
 
     if (config.logging.error) {
-      logIt(req, response, "error");
+      logIt(req, apiError, "error");
     }
 
     if (sendResponse) {
-      return res.status(response.code).json(response);
+      return res.status(apiError.code).json(apiError);
     }
   };
 
   instance.errorHandler = (err, req, res, next) => {
-    const response = {
+    const error = {
       code: err.code || err.statusCode || 500,
       message: "",
-      stack: "",
     };
 
     if (typeof err === "string") {
-      response.message = err;
+      error.message = err;
     } else if (err.message) {
-      response.message = err.message;
+      error.message = err.message;
     }
 
     if (config.logging.error) {
-      logIt(req, response, "error");
+      logIt(req, error, "error");
     }
 
-    return res.status(response.code).json(response);
+    return res.status(error.code).json(error);
   };
 
   instance.createError = createError;

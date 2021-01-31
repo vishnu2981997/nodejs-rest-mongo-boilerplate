@@ -1,11 +1,17 @@
-module.exports = ({ config, router, middlewares, controllers, helpers }) => {
+module.exports = ({
+  config,
+  router,
+  middlewares,
+  validations,
+  controllers,
+  helpers,
+}) => {
   const userApi = router();
 
-  const { userControllers } = controllers;
-
   const { authMiddleware } = middlewares;
-
   const { verifyAccessToken } = authMiddleware;
+
+  const { userControllers } = controllers;
 
   userApi.get(
     "/:userId",
