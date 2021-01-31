@@ -22,7 +22,7 @@ app.use(
 
 const router = express.Router;
 
-app.use("/api", v1({ config, router }));
+app.use(v1({ config, router }));
 
 app.use("*", (req, res, next) => {
   return res.status(404).json({ message: "No such route exists" });

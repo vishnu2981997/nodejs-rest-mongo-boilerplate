@@ -15,7 +15,11 @@ module.exports = ({ config, router }) => {
   services = services({ config, models, helpers });
   controllers = controllers({ config, services, helpers });
 
-  api.use("/v1", routes({ config, router, middlewares, controllers, helpers }));
+  api.use(
+    "/api/v1",
+    middlewares.loggingMiddleware.generateUUID,
+    routes({ config, router, middlewares, controllers, helpers })
+  );
 
   api.use(helpers.responseHelpers.errorHandler);
 
