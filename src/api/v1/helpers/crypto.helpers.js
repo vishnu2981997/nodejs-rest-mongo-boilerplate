@@ -5,7 +5,7 @@ module.exports.cryptoHelpers = ({ config }) => {
   const instance = {};
 
   instance.bCryptHash = (data) => {
-    return bCrypt.hash(data, 12);
+    return bCrypt.hash(data, config.crypto.bCrypt.salt);
   };
 
   instance.bCryptCompare = (data, hashedData) => {
@@ -13,11 +13,11 @@ module.exports.cryptoHelpers = ({ config }) => {
   };
 
   instance.jwtHash = (data, expire) => {
-    return jwt.sign(data, "secret", { expiresIn: expire });
+    return jwt.sign(data, config.crypto.jwt.secret, { expiresIn: expire });
   };
 
   instance.jwtVerify = (data) => {
-    return jwt.verify(data, "secret");
+    return jwt.verify(data, config.crypto.jwt.secret);
   };
 
   return instance;

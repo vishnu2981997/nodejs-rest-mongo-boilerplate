@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
+const config = require("config");
 
 // Build the connection string
 // const dbURI = `mongodb://${db.user}:${encodeURIComponent(db.password)}@${db.host}:${db.port}/${
 //     db.name
 // }`;
 
-const dbURI = `mongodb://localhost/nodejs-rest-mongo-boilerplate`;
+const dbURI = config.db.mongo.uri
+  ? config.db && config.db.mongo && config.db.mongo.uri
+  : undefined;
 
 const options = {
   useNewUrlParser: true,

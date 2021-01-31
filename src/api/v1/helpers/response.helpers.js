@@ -18,7 +18,9 @@ module.exports.responseHelpers = ({ config }) => {
       response.data = data;
     }
 
-    return res.status(code).json(response);
+    if (sendResponse) {
+      return res.status(code).json(response);
+    }
   };
 
   instance.apiError = (req, res, data, sendResponse = true) => {
@@ -34,7 +36,9 @@ module.exports.responseHelpers = ({ config }) => {
       response.data = data.message;
     }
 
-    return res.status(response.code).json(response);
+    if (sendResponse) {
+      return res.status(response.code).json(response);
+    }
   };
 
   instance.errorHandler = (err, req, res, next) => {
